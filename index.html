@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camión Minero AR</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.0/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.0/dist/mindar-image-aframe.prod.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Camión Minero Interactivo AR</h1>
+        
+        <button id="start-ar" class="ar-button">Iniciar Realidad Aumentada</button>
+        
+        <div id="ar-container">
+            <a-scene mindar-image="imageTargetSrc: ./targets/truck-targets.mind;" embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+                <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+                <!-- Marcador para el Motor -->
+                <a-entity mindar-image-target="targetIndex: 0">
+                    <a-plane position="0 0 0" height="1" width="1" rotation="0 0 0" material="color: white; opacity: 0.8">
+                        <a-text value="Motor\n2700 HP\nDiésel" align="center" position="0 0 0.1" color="black"></a-text>
+                    </a-plane>
+                </a-entity>
+
+                <!-- Marcador para la Tolva -->
+                <a-entity mindar-image-target="targetIndex: 1">
+                    <a-plane position="0 0 0" height="1" width="1" rotation="0 0 0" material="color: white; opacity: 0.8">
+                        <a-text value="Tolva\n400 toneladas" align="center" position="0 0 0.1" color="black"></a-text>
+                    </a-plane>
+                </a-entity>
+
+                <!-- Añade más marcadores para otras partes -->
+            </a-scene>
+        </div>
+        
+        <div class="interactive-container">
+            <div id="3d-container"></div>
+            
+            <div class="parts-list">
+                <div class="part" data-info="Motor: Motor diésel de alta potencia con más de 2000 HP. Diseñado para trabajo pesado continuo.">Motor</div>
+                <div class="part" data-info="Tolva: Capacidad de carga de hasta 400 toneladas. Sistema hidráulico de elevación.">Tolva de Carga</div>
+                <div class="part" data-info="Sistema de Suspensión: Suspensión hidro-neumática para terrenos difíciles.">Suspensión</div>
+                <div class="part" data-info="Neumáticos: 6 neumáticos de 3.8 metros de diámetro. Diseñados para terreno rocoso.">Neumáticos</div>
+                <div class="part" data-info="Cabina: Ergonómica con sistemas de monitoreo digital y aire acondicionado.">Cabina</div>
+                <div class="part" data-info="Sistema Hidráulico: Controla la elevación de la tolva y la dirección.">Sistema Hidráulico</div>
+                <div class="part" data-info="Sistema de Frenos: Frenos dinámicos eléctricos y frenos de disco húmedos.">Sistema de Frenos</div>
+                <div class="part" data-info="Sistema Eléctrico: 24V DC, alternador de alta capacidad y baterías industriales.">Sistema Eléctrico</div>
+            </div>
+        </div>
+
+        <div id="info-panel" class="info-panel">
+            <h3>Información del Componente</h3>
+            <p id="info-text">Selecciona una parte del camión para ver su información</p>
+            <div id="specs-panel"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
