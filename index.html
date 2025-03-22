@@ -13,31 +13,37 @@
     <div class="container">
         <h1>Camión Minero Interactivo AR</h1>
         
-        <!-- Eliminamos el botón ya que no es necesario -->
-        
         <div id="ar-container">
-            <a-scene mindar-image="imageTargetSrc: ./targets/truck-targets.mind; uiScanning: true;" embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-                <a-assets>
-                    <img id="motor-info" src="./images/motor-info.png">
-                    <img id="tolva-info" src="./images/tolva-info.png">
-                </a-assets>
-                <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: ${customFields.libVersion}; objects: .clickable"></a-camera>
+            <a-scene 
+                mindar-image="imageTargetSrc: ./targets/truck-targets.mind; 
+                             uiScanning: true;
+                             maxTrack: 2"
+                embedded
+                loading-screen="enabled: false"
+                renderer="colorManagement: true"
+                vr-mode-ui="enabled: false"
+                device-orientation-permission-ui="enabled: false">
+
+                <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
                 <!-- Marcador para el Motor -->
-                <a-entity mindar-image-target="targetIndex: 0">
-                    <a-plane position="0 0 0" height="1" width="1" rotation="0 0 0" material="color: white; opacity: 0.9">
-                        <a-text value="Motor\n2700 HP\nDiésel" align="center" position="0 0 0.1" color="black" scale="1 1 1"></a-text>
+                <a-entity mindar-image-target="targetIndex: 0" visible="false">
+                    <a-plane position="0 0 0" height="0.5" width="1" rotation="0 0 0" material="color: #ffffff; opacity: 0.9">
+                        <a-text value="Motor\n2700 HP\nDiésel" align="center" position="0 0 0.1" color="#000000" scale="0.8 0.8 0.8"></a-text>
                     </a-plane>
                 </a-entity>
 
                 <!-- Marcador para la Tolva -->
-                <a-entity mindar-image-target="targetIndex: 1">
-                    <a-plane position="0 0 0" height="1" width="1" rotation="0 0 0" material="color: white; opacity: 0.9">
-                        <a-text value="Tolva\n400 toneladas" align="center" position="0 0 0.1" color="black" scale="1 1 1"></a-text>
+                <a-entity mindar-image-target="targetIndex: 1" visible="false">
+                    <a-plane position="0 0 0" height="0.5" width="1" rotation="0 0 0" material="color: #ffffff; opacity: 0.9">
+                        <a-text value="Tolva\n400 toneladas" align="center" position="0 0 0.1" color="#000000" scale="0.8 0.8 0.8"></a-text>
                     </a-plane>
                 </a-entity>
+
             </a-scene>
         </div>
+        
+        <!-- Resto del contenido se mantiene igual -->
         
         <div class="interactive-container">
             <div id="3d-container"></div>

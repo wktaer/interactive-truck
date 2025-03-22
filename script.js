@@ -33,16 +33,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const infoText = document.getElementById('info-text');
     const specsPanel = document.getElementById('specs-panel');
 
-    // Evento para cuando se detecta un marcador
+    // Configuración de la escena AR
     const sceneEl = document.querySelector('a-scene');
+    
+    // Manejo de eventos AR
+    sceneEl.addEventListener("arReady", () => {
+        console.log("AR Sistema listo");
+    });
+
+    sceneEl.addEventListener("arError", () => {
+        console.log("Error AR: Verifica permisos de cámara");
+    });
+
     sceneEl.addEventListener("targetFound", event => {
-        console.log("target found");
+        console.log("Objetivo encontrado");
+        const targetIndex = event.target.getAttribute("mindar-image-target").targetIndex;
+        showARInfo(targetIndex);
     });
 
-    sceneEl.addEventListener("targetLost", event => {
-        console.log("target lost");
-    });
+    // Función para mostrar información AR
+    function showARInfo(targetIndex) {
+        const partsInfo = {
+            0: "Motor: 2700 HP, Diésel",
+            1: "Tolva: 400 toneladas",
+            // Añade más índices según necesites
+        };
+        
+        if (partsInfo[targetIndex]) {
+            infoText.textContent = partsInfo[targetIndex];
+        }
+    }
 
+    // Manejo de clicks en la lista de partes
     parts.forEach(part => {
         part.addEventListener('click', function() {
             const info = this.getAttribute('data-info');
@@ -65,7 +87,7 @@ function showSpecifications(partName) {
             'Material': 'Acero de alta resistencia',
             'Sistema de elevación': 'Hidráulico doble pistón',
             'Ángulo máximo': '45 grados'
-        },
+        }
         'Ruedas': {
             'Diámetro': '3.8 metros',
             'Tipo': 'Radial para minería',
