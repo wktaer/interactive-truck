@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Camión Minero AR</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.0/dist/mindar-image.prod.js"></script>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.0/dist/mindar-image-aframe.prod.js"></script>
+    <!-- Actualizar orden y versiones de scripts -->
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
 </head>
 <body>
     <div class="container">
@@ -15,38 +16,24 @@
         
         <div id="ar-container">
             <a-scene 
-                mindar-image="imageTargetSrc: ./targets/truck-targets.mind; 
-                             uiScanning: true;
-                             maxTrack: 2"
+                mindar-image="imageTargetSrc: ./targets/truck-targets.mind;"
                 embedded
                 loading-screen="enabled: false"
-                renderer="colorManagement: true"
-                vr-mode-ui="enabled: false"
-                device-orientation-permission-ui="enabled: false">
-
-                <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
-                <!-- Marcador para el Motor -->
-                <a-entity mindar-image-target="targetIndex: 0" visible="false">
-                    <a-plane position="0 0 0" height="0.5" width="1" rotation="0 0 0" material="color: #ffffff; opacity: 0.9">
-                        <a-text value="Motor\n2700 HP\nDiésel" align="center" position="0 0 0.1" color="#000000" scale="0.8 0.8 0.8"></a-text>
+                stats="false">
+                <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"></a-camera>
+                <a-entity mindar-image-target="targetIndex: 0">
+                    <a-plane color="yellow" opaciy="0.8" position="0 0 0" height="0.552" width="1" rotation="0 0 0">
+                        <a-text value="MOTOR\n2700 HP" align="center" position="0 0 0.1" scale="1 1 1" color="black"></a-text>
                     </a-plane>
                 </a-entity>
-
-                <!-- Marcador para la Tolva -->
-                <a-entity mindar-image-target="targetIndex: 1" visible="false">
-                    <a-plane position="0 0 0" height="0.5" width="1" rotation="0 0 0" material="color: #ffffff; opacity: 0.9">
-                        <a-text value="Tolva\n400 toneladas" align="center" position="0 0 0.1" color="#000000" scale="0.8 0.8 0.8"></a-text>
-                    </a-plane>
-                </a-entity>
-
             </a-scene>
         </div>
         
         <!-- Resto del contenido se mantiene igual -->
         
         <div class="interactive-container">
-            <div id="3d-container"></div>
+            <!-- Eliminar esta línea -->
+            <!-- <div id="3d-container"></div> -->
             
             <div class="parts-list">
                 <div class="part" data-info="Motor: Motor diésel de alta potencia con más de 2000 HP. Diseñado para trabajo pesado continuo.">Motor</div>
