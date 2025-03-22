@@ -33,46 +33,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const infoText = document.getElementById('info-text');
     const specsPanel = document.getElementById('specs-panel');
 
-    // Inicializar AR
-    const startAR = async () => {
-        const mindarThree = new window.MINDAR.IMAGE({
-            container: document.querySelector("#ar-container"),
-            imageTargetSrc: 'targets/truck-targets.mind',
-        });
-
-        const { renderer, scene, camera } = mindarThree;
-
-        // Crear marcadores AR para cada parte del camión
-        const truckParts = {
-            'ruedas': { targetIndex: 0, info: 'Neumáticos de alta resistencia' },
-            'motor': { targetIndex: 1, info: 'Motor diésel de 2700 HP' },
-            'cabina': { targetIndex: 2, info: 'Cabina ergonómica con controles digitales' },
-            'tolva': { targetIndex: 3, info: 'Sistema de carga de 400 toneladas' }
-        };
-
-        Object.entries(truckParts).forEach(([part, data]) => {
-            const { targetIndex, info } = data;
-            const anchor = mindarThree.addAnchor(targetIndex);
-            
-            anchor.onTargetFound = () => {
-                showSpecifications(part);
-                infoText.textContent = info;
-            };
-        });
-
-        await mindarThree.start();
-    }
-
-    // Iniciar AR cuando se presione el botón
-    document.getElementById('start-ar').addEventListener('click', () => {
-        startAR();
+    // Evento para cuando se detecta un marcador
+    const sceneEl = document.querySelector('a-scene');
+    sceneEl.addEventListener("targetFound", event => {
+        console.log("target found");
     });
 
-    // Mantener la funcionalidad existente para la lista de partes
+    sceneEl.addEventListener("targetLost", event => {
+        console.log("target lost");
+    });
+
     parts.forEach(part => {
         part.addEventListener('click', function() {
-            parts.forEach(p => p.classList.remove('active'));
-            this.classList.add('active');
             const info = this.getAttribute('data-info');
             infoText.textContent = info;
             showSpecifications(this.textContent);
