@@ -28,6 +28,28 @@ function init3D() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    const sceneEl = document.querySelector('a-scene');
+    const entity = document.querySelector('[mindar-image-target]');
+
+    // Monitoreo de eventos AR
+    sceneEl.addEventListener("arReady", (e) => {
+        console.log("AR Listo");
+    });
+
+    sceneEl.addEventListener("arError", (e) => {
+        console.log("Error AR:", e);
+    });
+
+    entity.addEventListener("targetFound", (e) => {
+        console.log("¡Objetivo encontrado!");
+        entity.setAttribute("visible", true);
+    });
+
+    entity.addEventListener("targetLost", (e) => {
+        console.log("Objetivo perdido");
+        entity.setAttribute("visible", false);
+    });
+
     const parts = document.querySelectorAll('.part');
     const infoPanel = document.getElementById('info-panel');
     const infoText = document.getElementById('info-text');
